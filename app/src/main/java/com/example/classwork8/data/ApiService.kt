@@ -7,6 +7,6 @@ import retrofit2.http.GET
 interface ApiService {
 
     @GET(Const.END_POINT)
-    suspend fun getInfo() : Response<List<StoreModel>>
+    suspend fun getInfo(): Response<List<StoreModel>>
 
 }

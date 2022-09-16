@@ -7,7 +7,8 @@ import android.os.Build
 
 val Context.isConnected: Boolean
     get() {
-        val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager =
+            this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> {
                 val nw = connectivityManager.activeNetwork ?: return false

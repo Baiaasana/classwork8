@@ -21,10 +21,10 @@ class StoreViewModel @Inject constructor(
     private val _infoState = MutableStateFlow<InfoViewState>(InfoViewState())
     val infoState = _infoState.asStateFlow()
 
-    fun getInfo(){
-//        resetState()
+    fun getInfo() {
+        resetState()
         viewModelScope.launch {
-                useCase.invoke().collect {
+            useCase.invoke().collect {
                 when (it.status) {
                     Resource.Status.SUCCESS -> {
                         val result = (it.data as List<StoreModel>)
@@ -44,6 +44,7 @@ class StoreViewModel @Inject constructor(
             }
         }
     }
+
     private fun resetState() {
         _infoState.value = _infoState.value.copy(
             isLoading = null,

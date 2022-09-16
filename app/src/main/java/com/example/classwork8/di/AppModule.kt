@@ -1,7 +1,6 @@
 package com.example.classwork8.di
 
 import android.content.Context
-import com.example.classwork8.App
 import com.example.classwork8.common.ResponseHandler
 import com.example.classwork8.data.ApiService
 import com.example.classwork8.data.remote.Interceptors
@@ -11,7 +10,6 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.internal.modules.ApplicationContextModule
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
@@ -33,10 +31,13 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providesOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor, @ApplicationContext context: Context): OkHttpClient =
+    fun providesOkHttpClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        @ApplicationContext context: Context,
+    ): OkHttpClient =
         OkHttpClient
             .Builder()
-            .addInterceptor(Interceptors.OflineInterseptor(context = context))
+            .addInterceptor(Interceptors.oflineInterseptor(context = context))
             .addNetworkInterceptor(Interceptors.onlineInterceptor())
             .cache(Interceptors.cacheSize(context))
             .addInterceptor(httpLoggingInterceptor)
@@ -64,7 +65,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun requestHandle() : ResponseHandler {
+    fun requestHandle(): ResponseHandler {
         return ResponseHandler()
     }
 }

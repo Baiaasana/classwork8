@@ -15,6 +15,5 @@ class StoreRepositoryImpl @Inject constructor(
     override suspend fun doNetworkCall(): Flow<Resource<List<StoreModel>>> = flow {
         emit(Resource.loading())
         emit(responseHandler.safeApiCall { api.getInfo() })
-
     }
 }

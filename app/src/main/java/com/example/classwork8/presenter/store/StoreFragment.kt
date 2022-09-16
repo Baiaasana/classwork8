@@ -11,9 +11,7 @@ import com.example.classwork8.adapter.StoreAdapter
 import com.example.classwork8.common.BaseFragment
 import com.example.classwork8.data.StoreModel
 import com.example.classwork8.databinding.FragmentStoreBinding
-import com.example.classwork8.utility.Resource
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -24,6 +22,9 @@ class StoreFragment : BaseFragment<FragmentStoreBinding>(FragmentStoreBinding::i
     private lateinit var storeAdapter: StoreAdapter
 
     override fun listeners() {
+        storeAdapter.itemClick = {
+            Toast.makeText(context, "You bought this Shmotka", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun init() {
@@ -48,7 +49,7 @@ class StoreFragment : BaseFragment<FragmentStoreBinding>(FragmentStoreBinding::i
                     viewModel.infoState.collect {
                         binding.progressBar.isVisible = true
                         storeAdapter.submitList(it.data)
-                        if (it.data == emptyList<StoreModel>()) {
+                        if (it.data == null) {
                             Toast.makeText(context, "Not Found Items", Toast.LENGTH_SHORT).show()
                         }
                         binding.progressBar.isVisible = false
