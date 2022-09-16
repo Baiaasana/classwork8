@@ -1,5 +1,6 @@
 package com.example.classwork8.di
 
+import com.example.classwork8.common.ResponseHandler
 import com.example.classwork8.data.ApiService
 import com.example.classwork8.utility.Const
 import com.squareup.moshi.Moshi
@@ -51,5 +52,11 @@ object AppModule {
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun requestHandle() : ResponseHandler {
+        return ResponseHandler()
     }
 }

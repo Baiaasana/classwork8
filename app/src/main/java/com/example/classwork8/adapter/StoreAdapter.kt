@@ -6,18 +6,18 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.classwork8.R
-import com.example.classwork8.StoreModel
+import com.example.classwork8.data.StoreModel
 import com.example.classwork8.databinding.SingleItemBinding
 import com.example.classwork8.utility.setImage
 
 class StoreAdapter :
-    ListAdapter<StoreModel.Item, StoreAdapter.ItemViewHolder>(ItemCallback) {
+    ListAdapter<StoreModel, StoreAdapter.ItemViewHolder>(ItemCallback) {
 
     inner class ItemViewHolder(private val binding: SingleItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind() {
-            val item: StoreModel.Item = getItem(adapterPosition)
+            val item: StoreModel = getItem(adapterPosition)
             binding.apply {
                 setImage(item.cover.toString(), ivItem)
                 tvPrice.text = item.price.toString()
@@ -38,17 +38,17 @@ class StoreAdapter :
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) = holder.bind()
 
-    object ItemCallback : DiffUtil.ItemCallback<StoreModel.Item>() {
+    object ItemCallback : DiffUtil.ItemCallback<StoreModel>() {
         override fun areItemsTheSame(
-            oldItem: StoreModel.Item,
-            newItem: StoreModel.Item,
+            oldItem: StoreModel,
+            newItem: StoreModel,
         ): Boolean {
             return oldItem.title == newItem.title
         }
 
         override fun areContentsTheSame(
-            oldItem: StoreModel.Item,
-            newItem: StoreModel.Item,
+            oldItem: StoreModel,
+            newItem: StoreModel,
         ): Boolean {
             return oldItem == newItem
         }

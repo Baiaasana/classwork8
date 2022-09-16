@@ -1,10 +1,9 @@
 package com.example.classwork8.presenter.store
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.classwork8.StoreModel
+import com.example.classwork8.data.StoreModel
 import com.example.classwork8.domain.use_case.GetInfoUseCase
 import com.example.classwork8.utility.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,11 +23,10 @@ class StoreViewModel @Inject constructor(
     fun getInfo(){
         resetState()
         viewModelScope.launch {
-            val data = useCase.invoke()
-            data.collect {
+                useCase.invoke().collect {
                 when (it.status) {
                     Resource.Status.SUCCESS -> {
-                        val result = (it.data as StoreModel)
+                        val result = (it.data as List<StoreModel>)
                         _infoState.value = _infoState.value.copy(isLoading = false, data = it.data)
                         Log.d("log1", " success - $result")
                     }
@@ -47,15 +45,15 @@ class StoreViewModel @Inject constructor(
     }
     private fun resetState() {
         _infoState.value = _infoState.value.copy(
-            isLoading = false,
-            data = StoreModel(emptyList()),
-            errorMessage = "",
+            isLoading = null,
+            data = null,
+            errorMessage = null,
         )
     }
 }
 
 data class InfoViewState(
-    val isLoading: Boolean = false,
-    val data: StoreModel = StoreModel(emptyList()),
-    val errorMessage: String = "",
+    val isLoading: Boolean? = null,
+    val data: List<StoreModel>? = null,
+    val errorMessage: String? = null,
 )

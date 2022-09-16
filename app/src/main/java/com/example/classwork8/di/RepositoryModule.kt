@@ -1,7 +1,7 @@
 package com.example.classwork8.di
 
 import com.example.classwork8.data.StoreRepositoryImpl
-import com.example.classwork8.domain.Repository
+import com.example.classwork8.domain.repository.Repository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

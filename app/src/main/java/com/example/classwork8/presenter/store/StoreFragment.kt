@@ -43,7 +43,7 @@ class StoreFragment : BaseFragment<FragmentStoreBinding>(FragmentStoreBinding::i
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.infoState.collect {
                     viewModel.infoState.collect{
-                        storeAdapter.submitList(it.data.itemList)
+                        storeAdapter.submitList(it.data)
                     }
                 }
             }
