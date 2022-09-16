@@ -15,11 +15,27 @@
         android:gravity="center"
         android:textColor="@color/white"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_store"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/single_item"
-        tools:itemCount="2"/>
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_store"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/single_item"
+            tools:itemCount="2"/>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"/>
+
+    </FrameLayout>
+
+
+
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

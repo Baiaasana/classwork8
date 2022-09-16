@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.classwork8.data.StoreModel
 import com.example.classwork8.domain.use_case.GetInfoUseCase
+import com.example.classwork8.utility.InfoViewState
 import com.example.classwork8.utility.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +22,7 @@ class StoreViewModel @Inject constructor(
     val infoState = _infoState.asStateFlow()
 
     fun getInfo(){
-        resetState()
+//        resetState()
         viewModelScope.launch {
                 useCase.invoke().collect {
                 when (it.status) {
@@ -52,8 +53,3 @@ class StoreViewModel @Inject constructor(
     }
 }
 
-data class InfoViewState(
-    val isLoading: Boolean? = null,
-    val data: List<StoreModel>? = null,
-    val errorMessage: String? = null,
-)
